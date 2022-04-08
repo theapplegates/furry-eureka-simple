@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "config:base",
+    "schedule:monthly",
+    "group:allNonMajor",
+    "group:gatsbyMonorepo",
+    "group:linters",
+    "group:babelMonorepo",
+    "docker:disable"
+  ],
+  "rebaseWhen": "conflicted",
+  "automerge": true,
+  "labels": [
+    "dependencies"
+  ],
+  "rangeStrategy": "bump",
+  "packageRules": [
+    {
+      "extends": "monorepo:babel",
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "groupName": "babel monorepo",
+      "automerge": true
+    },
+    {
+      "extends": "packages:linters",
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "groupName": "linters",
+      "automerge": true
+    }
+  ],
+  "ignoreDeps": [
+    "node"
+  ]
+}
